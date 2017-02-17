@@ -3,10 +3,10 @@ package org.devict.movie.db.entity
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.github.movies.db.json.deserializer.LocalDateJsonDeserialzier
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.Sortable
 import groovy.transform.ToString
+import org.devict.movie.db.entity.json.deserializer.LocalDateJsonDeserialzier
 
 import javax.persistence.*
 import javax.validation.constraints.NotNull
