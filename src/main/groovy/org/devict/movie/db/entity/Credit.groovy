@@ -9,6 +9,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Index
 import javax.persistence.Table
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
 /**
@@ -26,14 +27,19 @@ class Credit extends Storable
    @Size(min = 2, max = 150)
    String name
 
-   @Column(name = "tmdb_id")
+   @NotNull
    @JsonProperty(value = "id")
-   int theMovieDBid
+   @Column(name = "tmdb_id")
+   Integer theMovieDBid
 
+   @NotNull
    @Size(min = 3, max = 150)
+   @Column(length = 150, nullable = false)
    String job
 
+   @NotNull
    @Size(min = 10, max = 100)
+   @Column(length = 100, nullable = false)
    String creditId
 
    Credit()

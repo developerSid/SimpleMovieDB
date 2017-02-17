@@ -26,12 +26,17 @@ import java.time.LocalDate
 @JsonIgnoreProperties(ignoreUnknown = true)
 @NamedEntityGraph(
    name = "graph.movies.complete",
-   attributeNodes = @NamedAttributeNode(value = "genres", subgraph = "genres")
+   attributeNodes = [
+      @NamedAttributeNode(value = "genres", subgraph = "genres"),
+      @NamedAttributeNode(value = "directors", subgraph = "directors"),
+      @NamedAttributeNode(value = "cast", subgraph = "cast")
+   ]
 )
 class Movie extends Storable
 {
    @NotNull
-   @Size(min = 2, max = 150) //TODO build up validation configuration
+   @Size(min = 2, max = 150)
+   @Column(length = 150, nullable = false)
    String title
 
    @JsonProperty(value = "overview")
@@ -40,12 +45,12 @@ class Movie extends Storable
 
    @JsonDeserialize(using = LocalDateJsonDeserialzier.class)
    @JsonProperty(value = "release_date")
-   @Column
+   @Column(nullable = true)
    LocalDate releaseDate
 
    @JsonProperty(value = "id")
    @Column(name = "tmdb_id", nullable = false)
-   int theMovieDBid
+   Integer theMovieDBid
 
    @ManyToMany(cascade = CascadeType.ALL)
    @JoinTable(name = "movie_genre",
@@ -89,8 +94,8 @@ class Movie extends Storable
    }
 
    @JsonProperty(value = "id") //have to put in an explicit setter so Jackson maps this correctly for rest
-   void setTheMovieDBid(int theMovieDBid)
+   void setTheMovieDBid(Integer theMovieDBid)
    {
-      this.theMovieDBid=theMovieDBid
+      this.theMovieDBid = theMovieDBid
    }
 }

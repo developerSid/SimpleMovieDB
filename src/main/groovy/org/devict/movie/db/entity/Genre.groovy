@@ -7,6 +7,8 @@ import groovy.transform.Sortable
 import groovy.transform.ToString
 
 import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * Created by developerSid on 1/22/17.
@@ -21,15 +23,18 @@ import javax.persistence.*
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Genre extends Storable
 {
-   @Column(unique = true)
+   @NotNull
+   @Size(min = 2, max = 100)
+   @Column(unique = true, nullable = false, length = 100)
    String name
 
-   @Column(name = "tmdb_id")
+   @NotNull
    @JsonProperty(value = "id")
+   @Column(name = "tmdb_id", nullable = false)
    Integer theMovieDBid
 
    @ManyToMany(mappedBy = "genres")
-   List<Movie> movies
+   List<Movie> movies = []
 
    Genre()
    {
