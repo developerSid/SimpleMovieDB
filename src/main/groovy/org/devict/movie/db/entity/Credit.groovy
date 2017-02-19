@@ -11,6 +11,7 @@ import javax.persistence.Index
 import javax.persistence.Table
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
+import java.time.LocalDateTime
 
 /**
  * Created by developerSid on 1/12/17.
