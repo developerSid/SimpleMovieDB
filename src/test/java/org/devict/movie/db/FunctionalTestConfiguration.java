@@ -1,5 +1,6 @@
 package org.devict.movie.db;
 
+import org.junit.Ignore;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * Configures the test JPA harness.
  */
+@Ignore
 @ComponentScan(basePackages = "org.devict.movie.db")
 @AutoConfigureDataJpa
 public class FunctionalTestConfiguration

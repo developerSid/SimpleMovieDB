@@ -4,6 +4,7 @@ import org.devict.movie.db.entity.Genre;
 import org.devict.movie.db.entity.Movie;
 import org.devict.movie.db.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class JpaMovieService implements MovieService
    }
 
    @Override
-   public Movie saveMovie(Movie movie)
+   public Movie save(Movie movie)
    {
       List<Genre> savedGenres = genreService.saveAll(movie.getGenres());
 
@@ -41,13 +42,13 @@ public class JpaMovieService implements MovieService
    }
 
    @Override
-   public List<Movie> findMovie(String title, Pageable pageable)
+   public Page<Movie> find(String title, Pageable pageable)
    {
       return movieRepository.findByTitleContainingIgnoreCase(title, pageable);
    }
 
    @Override
-   public Optional<Movie> findMovie(Long id)
+   public Optional<Movie> find(Long id)
    {
       return Optional.ofNullable(movieRepository.findOne(id));
    }
@@ -59,8 +60,8 @@ public class JpaMovieService implements MovieService
    }
 
    @Override
-   public List<Movie> findByDirectorName(String directorName)
+   public Page<Movie> findByDirectorName(String directorName, Pageable pageable)
    {
-      return movieRepository.findAllMoviesByDirector(directorName);
+      return movieRepository.findAllMoviesByDirector(directorName, pageable);
    }
 }

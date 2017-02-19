@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -50,7 +51,7 @@ public class FunctionalTestJpaMovieService
          )
       );
 
-      Optional<Movie> found = jpaMovieService.findMovie(persisted.getId());
+      Optional<Movie> found = jpaMovieService.find(persisted.getId());
 
       Assertions.assertThat(found).isPresent();
    }
@@ -60,7 +61,7 @@ public class FunctionalTestJpaMovieService
    {
       Movie toSave = new Movie("test title saveAll", "test description saveAll", 2, LocalDate.of(2000, Month.APRIL, 12));
 
-      Movie saved = jpaMovieService.saveMovie(toSave);
+      Movie saved = jpaMovieService.save(toSave);
 
       Assertions.assertThat(saved).isNotNull();
 
@@ -98,7 +99,7 @@ public class FunctionalTestJpaMovieService
       );
 
       PageRequest page = new PageRequest(0, 3);
-      List<Movie> movies = jpaMovieService.findMovie("test title", page);
+      Page<Movie> movies = jpaMovieService.find("test title", page);
 
       Assertions.assertThat(movies)
          .hasSize(2)
@@ -109,7 +110,7 @@ public class FunctionalTestJpaMovieService
    @Test
    public void testSavingGenres()
    {
-      Movie movieOne = jpaMovieService.saveMovie(
+      Movie movieOne = jpaMovieService.save(
          new Movie(
             "test title",
             "test description",
@@ -128,7 +129,7 @@ public class FunctionalTestJpaMovieService
             Collections.emptyList()
          )
       );
-      Movie movieTwo = jpaMovieService.saveMovie(
+      Movie movieTwo = jpaMovieService.save(
          new Movie(
             "test title 2",
             "test description2 ",
@@ -147,7 +148,7 @@ public class FunctionalTestJpaMovieService
             Collections.emptyList()
          )
       );
-      Movie movieThree = jpaMovieService.saveMovie(
+      Movie movieThree = jpaMovieService.save(
          new Movie(
             "movie 3",
             "movie 3 description 3",
@@ -192,6 +193,7 @@ public class FunctionalTestJpaMovieService
    {
       Credit directorOne = new Credit("director prime", 1, "Director", "JDKJFOIJOIJKJFIJE88988080");
       Credit directorTwo = new Credit("director subprime", 1, "Director", "IEUFJIEFJOIJFE998U9898U44F");
+      PageRequest page = new PageRequest(0, 10);
 
 
       Stream.of(
@@ -219,14 +221,14 @@ public class FunctionalTestJpaMovieService
             Collections.emptyList(),
             Collections.singletonList(directorOne)
          )
-      ).forEach(jpaMovieService::saveMovie);
+      ).forEach(jpaMovieService::save);
 
-      List<Movie> movies = jpaMovieService.findByDirectorName("director prime");
+      Page<Movie> movies = jpaMovieService.findByDirectorName("director prime", page);
 
       Assertions.assertThat(movies).hasSize(2);
-      Assertions.assertThat(movies.get(0)).hasNoNullFieldsOrProperties();
-      Assertions.assertThat(movies.get(0).getTitle()).isEqualTo("test title");
-      Assertions.assertThat(movies.get(1)).hasNoNullFieldsOrProperties();
-      Assertions.assertThat(movies.get(1).getTitle()).isEqualTo("movie 3");
+      Assertions.assertThat(movies.getContent().get(0)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(movies.getContent().get(0).getTitle()).isEqualTo("test title");
+      Assertions.assertThat(movies.getContent().get(1)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(movies.getContent().get(1).getTitle()).isEqualTo("movie 3");
    }
 }
