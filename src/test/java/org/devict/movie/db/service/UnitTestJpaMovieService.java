@@ -8,6 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -46,7 +48,7 @@ public class UnitTestJpaMovieService
 
       Mockito.when(movieRepository.findOne(1L)).thenReturn(movie);
 
-      Optional<Movie> result = movieService.findMovie(1L);
+      Optional<Movie> result = movieService.find(1L);
 
       Assertions.assertThat(result)
          .isPresent()
@@ -61,7 +63,7 @@ public class UnitTestJpaMovieService
    {
       Mockito.when(movieRepository.findOne(1L)).thenReturn(null);
 
-      Optional<Movie> result = movieService.findMovie(1L);
+      Optional<Movie> result = movieService.find(1L);
 
       Assertions.assertThat(result)
          .isNotPresent()
@@ -91,7 +93,7 @@ public class UnitTestJpaMovieService
 
       Mockito.when(movieRepository.save(movie)).thenReturn(saved);
 
-      Movie result = movieService.saveMovie(movie);
+      Movie result = movieService.save(movie);
 
       Assertions.assertThat(result).isEqualTo(saved);
       Assertions.assertThat(result.getId()).isEqualTo(1L);
@@ -119,9 +121,9 @@ public class UnitTestJpaMovieService
       saved.setCreated(LocalDateTime.of(1955, 11, 5, 7, 22));
       saved.setUpdated(LocalDateTime.of(1985, 10, 26, 7, 22));
 
-      Mockito.when(movieRepository.findByTitleContainingIgnoreCase("Movie Title", pageable)).thenReturn(Collections.singletonList(saved));
+      Mockito.when(movieRepository.findByTitleContainingIgnoreCase("Movie Title", pageable)).thenReturn(new PageImpl<>(Collections.singletonList(saved)));
 
-      List<Movie> result = movieService.findMovie("Movie Title", pageable);
+      Page<Movie> result = movieService.find("Movie Title", pageable);
 
       Assertions.assertThat(result)
          .containsOnly(saved)
