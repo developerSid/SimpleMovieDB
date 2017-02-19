@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.1.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+   ext {
+      springBootVersion='1.5.1.RELEASE'
+   }
+   repositories {
+      mavenCentral()
+   }
+   dependencies {
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+   }
 }
 
 apply plugin: 'groovy'
@@ -15,21 +15,22 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	baseName = 'SimpleMovieDB'
-	version = '0.0.1-SNAPSHOT'
+   baseName='SimpleMovieDB'
+   version='0.0.1-SNAPSHOT'
 }
 
-sourceCompatibility = 1.8
+sourceCompatibility=1.8
 
 repositories {
-	mavenCentral()
+   mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile('org.codehaus.groovy:groovy-all:2.4.8')
+   compile('org.springframework.boot:spring-boot-starter-aop')
+   compile('org.springframework.boot:spring-boot-starter-data-jpa')
+   compile('org.springframework.boot:spring-boot-starter-data-rest')
+   compile('org.codehaus.groovy:groovy-all:2.4.8')
    compile('com.esotericsoftware:kryo:4.0.0')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
