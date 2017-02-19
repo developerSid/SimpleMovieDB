@@ -1,6 +1,7 @@
 package org.devict.movie.db.repository;
 
 import org.devict.movie.db.entity.Movie;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long>
 {
-   List<Movie> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
+   Page<Movie> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
 
    @EntityGraph(value = "graph.movies.complete", type = EntityGraphType.LOAD)
    Optional<Movie> findMovieById(Long id);
@@ -30,5 +31,5 @@ public interface MovieRepository extends JpaRepository<Movie, Long>
       + "from Movie m "
       + "   join m.directors c "
       + "where c.name = ?1")
-   List<Movie> findAllMoviesByDirector(String directorName);
+   Page<Movie> findAllMoviesByDirector(String directorName, Pageable pageable);
 }

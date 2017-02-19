@@ -24,12 +24,6 @@ public class JpaCreditService implements CreditService
    }
 
    @Override
-   public Credit save(Credit credit)
-   {
-      return creditRepository.save(credit);
-   }
-
-   @Override
    public List<Credit> saveAll(Collection<Credit> credits)
    {
       List<Credit> foundCredits = creditRepository.findByTheMovieDBidInOrderByNameAsc(credits.stream().map(Credit::getTheMovieDBid).collect(Collectors.toList()));

@@ -6,6 +6,15 @@ import org.devict.movie.db.repository.CreditRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by developerSid on 2/17/17.
@@ -25,24 +34,43 @@ public class UnitTestJpaCreditService
    }
 
    @Test
-   public void testSave()
+   public void testSaveAllNew()
    {
-      Credit credit = new Credit("Jay Leno", 1, "host", "A2");
+      List<Credit> saveList = Arrays.asList(
+         new Credit("Bill Murray", 1, "Dr. Peter Venkman", "A2"),
+         new Credit("Dan Aykroyd", 2, "Dr. Raymon Stanze", "A3"),
+         new Credit("Harold Ramis", 3, "Dr. Egon Spengler", "A4"),
+         new Credit("Ernie Hudson", 4, "Winston Zeddmore", "A5"),
+         new Credit("Ivan Reitman", 5, "Director", "A6")
+      );
+      Mockito.when(creditRepository.findByTheMovieDBidInOrderByNameAsc(Mockito.anyIterable())).thenReturn(Collections.emptyList());
+      Mockito.when(creditRepository.save(saveList)).then(new Answer<List<Credit>>()
+      {
+         long id = 1;
 
-      Mockito.when(creditRepository.save(credit)).then(invocation -> {
-         Credit toReturn = invocation.getArgument(0);
+         @Override
+         public List<Credit> answer(InvocationOnMock invocation) throws Throwable
+         {
+            List<Credit> credits = invocation.getArgument(0);
 
-         toReturn.setId(15L);
+            return credits.stream().map(c ->
+            {
+               c.setId(id++);
+               c.setCreated(LocalDateTime.of(2017, Month.FEBRUARY, 21, 7, 0));
+               c.setUpdated(LocalDateTime.of(2017, Month.FEBRUARY, 21, 7, 0));
 
-         return toReturn;
+               return c;
+            }).collect(Collectors.toList());
+         }
       });
-      Credit result = jpaCreditService.save(credit);
+      List<Credit> result = jpaCreditService.saveAll(saveList);
 
-      Assertions.assertThat(result)
-         .isNotNull()
-         .hasNoNullFieldsOrProperties()
-         .extracting("id").isEqualTo(15)
-         .extracting("theMovieDBid").isEqualTo(1)
-      ;
+      Assertions.assertThat(result).isNotNull();
+      Assertions.assertThat(result).hasSize(5);
+      Assertions.assertThat(result.get(0)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(result.get(1)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(result.get(2)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(result.get(3)).hasNoNullFieldsOrProperties();
+      Assertions.assertThat(result.get(4)).hasNoNullFieldsOrProperties();
    }
 }

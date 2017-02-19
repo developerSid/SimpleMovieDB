@@ -12,7 +12,5 @@ import java.util.List;
  */
 public interface CreditService
 {
-   Credit save(Credit credit);
-
    List<Credit> saveAll(Collection<Credit> credits);
 }
