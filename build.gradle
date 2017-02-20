@@ -31,6 +31,7 @@ dependencies {
    compile('org.springframework.boot:spring-boot-starter-data-jpa')
    compile('org.springframework.boot:spring-boot-starter-data-rest')
    compile('org.codehaus.groovy:groovy-all:2.4.8')
+   compile('org.apache.commons:commons-lang3:3.5')
    compile('com.esotericsoftware:kryo:4.0.0')
    runtime('com.h2database:h2')
    runtime('mysql:mysql-connector-java')
