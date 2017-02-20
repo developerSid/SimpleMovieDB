@@ -27,6 +27,7 @@ import java.util.Optional;
 public class UnitTestJpaMovieService
 {
    private GenreService genreService;
+   private CreditService creditService;
    private MovieRepository movieRepository;
    private JpaMovieService movieService;
 
@@ -35,7 +36,8 @@ public class UnitTestJpaMovieService
    {
       genreService = Mockito.mock(GenreService.class);
       movieRepository = Mockito.mock(MovieRepository.class);
-      movieService = new JpaMovieService(movieRepository, genreService);
+      creditService = Mockito.mock(CreditService.class);
+      movieService = new JpaMovieService(movieRepository, genreService, creditService);
    }
 
    @Test

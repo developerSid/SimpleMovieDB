@@ -1,5 +1,6 @@
 package org.devict.movie.db.service;
 
+import org.devict.movie.db.entity.Credit;
 import org.devict.movie.db.entity.Genre;
 import org.devict.movie.db.entity.Movie;
 import org.devict.movie.db.repository.MovieRepository;
@@ -23,20 +24,26 @@ public class JpaMovieService implements MovieService
 {
    private final MovieRepository movieRepository;
    private final GenreService genreService;
+   private final CreditService creditService;
 
    @Autowired
-   public JpaMovieService(MovieRepository movieRepository, GenreService genreService)
+   public JpaMovieService(MovieRepository movieRepository, GenreService genreService, CreditService creditService)
    {
       this.movieRepository = movieRepository;
       this.genreService = genreService;
+      this.creditService = creditService;
    }
 
    @Override
    public Movie save(Movie movie)
    {
       List<Genre> savedGenres = genreService.saveAll(movie.getGenres());
+      List<Credit> savedCast = creditService.saveAll(movie.getCast());
+      List<Credit> savedDirectors = creditService.saveAll(movie.getDirectors());
 
       movie.setGenres(savedGenres);
+      movie.setCast(savedCast);
+      movie.setDirectors(savedDirectors);
 
       return movieRepository.save(movie);
    }
