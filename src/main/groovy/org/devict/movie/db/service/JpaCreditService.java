@@ -27,11 +27,12 @@ public class JpaCreditService implements CreditService
    public List<Credit> saveAll(Collection<Credit> credits)
    {
       List<Credit> foundCredits = creditRepository.findByTheMovieDBidInOrderByNameAsc(credits.stream().map(Credit::getTheMovieDBid).collect(Collectors.toList()));
-      Collection<Credit> toSave = credits;
+      Collection<Credit> toSave = new TreeSet<>(Comparator.comparing(Credit::getTheMovieDBid));
+      toSave.addAll(credits);
 
       if(!foundCredits.isEmpty())
       {
-         toSave = new ArrayList<>();
+         toSave.clear();
 
          for(Credit genre : credits)
          {

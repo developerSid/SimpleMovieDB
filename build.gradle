@@ -36,7 +36,7 @@ dependencies {
    compile('org.apache.commons:commons-lang3:3.5')
    compile('com.google.guava:guava:21.0')
    compile('com.esotericsoftware:kryo:4.0.0')
-	runtime('com.h2database:h2')
+	compile('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
 	runtime('org.postgresql:postgresql')
 	runtime('com.microsoft.sqlserver:mssql-jdbc')
