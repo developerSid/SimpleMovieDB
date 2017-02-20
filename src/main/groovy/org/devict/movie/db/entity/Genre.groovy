@@ -17,8 +17,8 @@ import javax.validation.constraints.Size
  */
 @Entity
 @Sortable(excludes = "movies")
-@EqualsAndHashCode
-@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString(includeNames = true, includeFields = true, includeSuper = true)
 @Table(name = "genre", indexes = @Index(columnList = "name"))
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Genre extends Storable

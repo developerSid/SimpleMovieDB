@@ -49,8 +49,9 @@ public class JpaGenreService implements GenreService
 
       if(!toSave.isEmpty())
       {
-         List<Genre> toReturn = new ArrayList<>(genreRepository.save(toSave));
+         List<Genre> toReturn = new ArrayList<>(toSave.size() + foundGenres.size());
 
+         toReturn.addAll(genreRepository.save(toSave));
          toReturn.addAll(foundGenres);
 
          return toReturn;
