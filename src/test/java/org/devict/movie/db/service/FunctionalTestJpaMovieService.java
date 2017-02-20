@@ -1,6 +1,5 @@
 package org.devict.movie.db.service;
 
-import java.time.LocalDateTime;
 import org.assertj.core.api.Assertions;
 import org.devict.movie.db.FunctionalTestConfiguration;
 import org.devict.movie.db.entity.Credit;
@@ -195,7 +194,7 @@ public class FunctionalTestJpaMovieService
    public void testDirectorQuery()
    {
       Credit directorOne = new Credit("director prime", 1, "Director", "JDKJFOIJOIJKJFIJE88988080");
-      Credit directorTwo = new Credit("director subprime", 1, "Director", "IEUFJIEFJOIJFE998U9898U44F");
+      Credit directorTwo = new Credit("director subprime", 2, "Director", "IEUFJIEFJOIJFE998U9898U44F");
       PageRequest page = new PageRequest(0, 10);
 
 
