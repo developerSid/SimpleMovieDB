@@ -19,8 +19,8 @@ import javax.validation.constraints.Size
  */
 @Entity
 @Sortable
-@EqualsAndHashCode
-@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString(includeNames = true, includeFields = true, includeSuper = true)
 @Table(name = "credit", indexes = @Index(columnList = "name"))
 class Credit extends Storable
 {
