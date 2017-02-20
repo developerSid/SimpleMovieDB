@@ -44,8 +44,7 @@ if(enabledLoggers.contains('STDOUT'))
    }
 }
 
-// this can be changed to any number of things.  These are the ones that I carried around most of the time.
-logger('org.springframework', ERROR)
+logger('org.springframework', INFO)
 logger('org.apache', ERROR)
 logger('org.hibernate', ERROR)
 
