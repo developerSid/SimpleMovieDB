@@ -44,8 +44,9 @@ public class JpaCreditService implements CreditService
 
       if(!toSave.isEmpty())
       {
-         List<Credit> toReturn = new ArrayList<>(creditRepository.save(toSave));
+         List<Credit> toReturn = new ArrayList<>(toSave.size() + foundCredits.size());
 
+         toReturn.addAll(creditRepository.save(toSave));
          toReturn.addAll(foundCredits);
 
          return toReturn;
