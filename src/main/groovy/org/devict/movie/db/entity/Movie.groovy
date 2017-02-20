@@ -20,8 +20,8 @@ import java.time.LocalDate
  */
 @Entity
 @Sortable(excludes = ["genres", "directors", "cast"])
-@EqualsAndHashCode
-@ToString(includeNames = true, includeFields = true)
+@EqualsAndHashCode(callSuper = true)
+@ToString(includeNames = true, includeFields = true, includeSuper = true)
 @Table(name = "movie", indexes = @Index(columnList = "title"))
 @JsonIgnoreProperties(ignoreUnknown = true)
 class Movie extends Storable

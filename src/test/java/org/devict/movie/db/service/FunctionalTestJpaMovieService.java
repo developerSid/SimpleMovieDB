@@ -1,5 +1,6 @@
 package org.devict.movie.db.service;
 
+import java.time.LocalDateTime;
 import org.assertj.core.api.Assertions;
 import org.devict.movie.db.FunctionalTestConfiguration;
 import org.devict.movie.db.entity.Credit;
@@ -170,13 +171,15 @@ public class FunctionalTestJpaMovieService
          .collect(Collectors.toList())
       ;
 
-      List<Genre> results = jdbc.query("SELECT id, name, tmdb_id FROM Genre", (rs, rowNum) ->
+      List<Genre> results = jdbc.query("SELECT id, name, tmdb_id, created, updated FROM Genre", (rs, rowNum) ->
       {
          Genre toReturn = new Genre();
 
          toReturn.setId(rs.getLong("id"));
          toReturn.setName(rs.getString("name"));
          toReturn.setTheMovieDBid(rs.getInt("tmdb_id"));
+         toReturn.setCreated(rs.getTimestamp("created").toLocalDateTime());
+         toReturn.setUpdated(rs.getTimestamp("updated").toLocalDateTime());
 
          return toReturn;
       });
