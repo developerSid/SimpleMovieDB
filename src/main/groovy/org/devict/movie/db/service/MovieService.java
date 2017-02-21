@@ -18,6 +18,5 @@ public interface MovieService
    Movie save(Movie movie);
    Optional<Movie> find(Long id);
    Page<Movie> find(String title, Pageable pageable);
-   Optional<Movie> loadMovieGraph(Long id);
    Page<Movie> findByDirectorName(String directorName, Pageable pageable);
 }

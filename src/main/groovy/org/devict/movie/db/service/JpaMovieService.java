@@ -61,12 +61,6 @@ public class JpaMovieService implements MovieService
    }
 
    @Override
-   public Optional<Movie> loadMovieGraph(Long id)
-   {
-      return movieRepository.findMovieById(id);
-   }
-
-   @Override
    public Page<Movie> findByDirectorName(String directorName, Pageable pageable)
    {
       return movieRepository.findAllMoviesByDirector(directorName, pageable);
