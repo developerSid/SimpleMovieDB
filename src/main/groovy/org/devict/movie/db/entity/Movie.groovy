@@ -24,14 +24,6 @@ import java.time.LocalDate
 @ToString(includeNames = true, includeFields = true, includeSuper = true)
 @Table(name = "movie", indexes = @Index(columnList = "title"))
 @JsonIgnoreProperties(ignoreUnknown = true)
-@NamedEntityGraph(
-   name = "graph.movies.complete",
-   attributeNodes = [
-      @NamedAttributeNode(value = "genres", subgraph = "genres"),
-      @NamedAttributeNode(value = "directors", subgraph = "directors"),
-      @NamedAttributeNode(value = "cast", subgraph = "cast")
-   ]
-)
 class Movie extends Storable
 {
    @NotNull
