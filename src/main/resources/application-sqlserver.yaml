@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: develop
+    active: sqlserver
   datasource:
     url: jdbc:sqlserver://localhost:1433
     username: sa

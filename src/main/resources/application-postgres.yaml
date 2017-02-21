@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: develop
+    active: mysql
   datasource:
     url: jdbc:postgresql://localhost:5432/dev
     username: developer

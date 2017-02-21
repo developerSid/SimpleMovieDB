@@ -24,12 +24,14 @@ import javax.validation.constraints.Size
 @Table(name = "credit", indexes = @Index(columnList = "name"))
 class Credit extends Storable
 {
+   @NotNull
    @Size(min = 2, max = 150)
+   @Column(length = 150, nullable = false)
    String name
 
    @NotNull
    @JsonProperty(value = "id")
-   @Column(name = "tmdb_id")
+   @Column(name = "tmdb_id", unique = true, nullable = false)
    Integer theMovieDBid
 
    @NotNull
