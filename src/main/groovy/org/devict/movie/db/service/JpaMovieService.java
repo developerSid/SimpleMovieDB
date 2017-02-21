@@ -65,4 +65,10 @@ public class JpaMovieService implements MovieService
    {
       return movieRepository.findAllMoviesByDirector(directorName, pageable);
    }
+
+   @Override
+   public List<Movie> findByDirectorNameNative(String directorName)
+   {
+      return movieRepository.findAllMoviesByDirectorNative(directorName);
+   }
 }

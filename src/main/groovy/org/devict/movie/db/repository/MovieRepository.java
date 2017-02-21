@@ -21,9 +21,21 @@ public interface MovieRepository extends JpaRepository<Movie, Long>
    Page<Movie> findByTitleContainingIgnoreCase(@Param("title") String title, Pageable pageable);
 
    @Query(value =
-        "select m "
-      + "from Movie m "
-      + "   join m.directors c "
-      + "where c.name = ?1")
+      "SELECT m " +
+      "FROM Movie m " +
+      "   JOIN m.directors c " +
+      "WHERE c.name = ?1")
    Page<Movie> findAllMoviesByDirector(String directorName, Pageable pageable);
+
+   @Query(nativeQuery = true,
+      value =
+      "SELECT m.* " +
+      "FROM Movie m " +
+      "   JOIN Movie_Director md " +
+      "     ON m.id = md.movie_id " +
+      "   JOIN Credit c " +
+      "     ON md.director_id = c.id " +
+      "WHERE c.name = ?1"
+   )
+   List<Movie> findAllMoviesByDirectorNative(String directorName);
 }

@@ -19,4 +19,5 @@ public interface MovieService
    Optional<Movie> find(Long id);
    Page<Movie> find(String title, Pageable pageable);
    Page<Movie> findByDirectorName(String directorName, Pageable pageable);
+   List<Movie> findByDirectorNameNative(String directorName);
 }
