@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -26,10 +27,10 @@ import org.springframework.web.client.RestTemplate;
 public class RestfulTheMovieDBService implements TheMovieDBService
 {
    private final String apiKey;
-   private final RestTemplate restTemplate;
+   private final RestOperations restTemplate;
 
    @Autowired
-   public RestfulTheMovieDBService(@Value("${tmdb.api.key}") String apiKey, RestTemplate restTemplate)
+   public RestfulTheMovieDBService(@Value("${tmdb.api.key}") String apiKey, RestOperations restTemplate)
    {
       this.apiKey = apiKey;
       this.restTemplate = restTemplate;

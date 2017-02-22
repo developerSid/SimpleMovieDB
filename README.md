@@ -17,10 +17,10 @@ Example Project provides 4 possible modes via 3 of which require Docker
    - uses H2 an embeddable native Java database that is useful for testing
    - starts and stops with the application
    - configuration
-     * application.yaml -> default when not ran with --profile this one will be picked
+     * application.yaml -> default when not ran with --spring.profiles.active this one will be picked
      * configures the JDBC driver for H2
    - To run
-     * java -jar ./build/libs/SimpleMovieDB.jar --profile=local --tmdb.api.key=${TMDB_API_KEY}
+     * java -jar ./build/libs/SimpleMovieDB-0.0.1-SNAPSHOT.jar --spring.profiles.active=local --tmdb.api.key=${TMDB_API_KEY}
    - The H2 web console has been enabled it can be reached by going to [H2-Console](http://localhost:8080/h2-console)
      * just use the default provided credentials and click connect
 1. mysql
@@ -30,9 +30,9 @@ Example Project provides 4 possible modes via 3 of which require Docker
    - configuration
      * application-mysql.yaml
      * configures the JDBC driver for MySQL 5.7
-     * runs when --profile=mysql
+     * runs when --spring.profiles.active=mysql
    - To run
-     * java -jar ./build/libs/SimpleMovieDB.jar --profile=mysql --tmdb.api.key=${TMDB_API_KEY}
+     * java -jar ./build/libs/SimpleMovieDB-0.0.1-SNAPSHOT.jar --spring.profiles.active=mysql --tmdb.api.key=${TMDB_API_KEY}
    - Connect to the running database using a SQL database access tool such as [SQuirrel SQL](http://www.squirrelsql.org)
      * url: jdbc:mysql://localhost:3306/dev
      * username: developer
@@ -45,9 +45,9 @@ Example Project provides 4 possible modes via 3 of which require Docker
    - configuration
      * application-postgres.yaml
      * configures the JDBC driver for Postgres
-     * runs when --profile=postgres
+     * runs when --spring.profiles.active=postgres
    - To run
-     * java -jar ./build/libs/SimpleMovieDB.jar --profile=postgres --tmdb.api.key=${TMDB_API_KEY}
+     * java -jar ./build/libs/SimpleMovieDB-0.0.1-SNAPSHOT.jar --spring.profiles.active=postgres --tmdb.api.key=${TMDB_API_KEY}
    - Connect to the running database using a SQL database access tool such as [SQuirrel SQL](http://www.squirrelsql.org)
      * url: jdbc:postgresql://localhost:5432/dev
      * username: developer
@@ -60,9 +60,9 @@ Example Project provides 4 possible modes via 3 of which require Docker
    - configuration
      * application-sqlserver.yaml
      * configures the JDBC driver for SQL Server
-     * runs when --profile=sqlserver
+     * runs when --spring.profiles.active=sqlserver
    - To run
-     * java -jar ./build/libs/SimpleMovieDB.jar --profile=sqlserver --tmdb.api.key=${TMDB_API_KEY}
+     * java -jar ./build/libs/SimpleMovieDB-0.0.1-SNAPSHOT.jar --spring.profiles.active=sqlserver --tmdb.api.key=${TMDB_API_KEY}
    - Connect to the running database using a SQL database access tool such as [SQuirrel SQL](http://www.squirrelsql.org)
      * url: jdbc:sqlserver://localhost:1433
      * username: sa

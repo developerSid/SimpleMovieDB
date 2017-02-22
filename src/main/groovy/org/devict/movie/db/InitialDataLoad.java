@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * Loads data
  */
 @Component
-@Profile({"local", "mysql", "postgres", "sqlserver"})
+@Profile({"development", "mysql", "postgres", "sqlserver"})
 public class InitialDataLoad implements CommandLineRunner
 {
    private static final Logger logger = LoggerFactory.getLogger(InitialDataLoad.class);
